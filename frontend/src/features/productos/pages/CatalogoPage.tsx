@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 
 import { EstadoError } from '../../../shared/components/EstadoError'
@@ -17,6 +17,7 @@ export default function CatalogoPage() {
   const [textoBusqueda, setTextoBusqueda] = useState('')
   const [search, setSearch] = useState('')
   const [categoriaId, setCategoriaId] = useState<number | undefined>(undefined)
+  const temporizador = useRef<number | undefined>(undefined)
 
   const categorias = useCategorias()
   // Paginación en el servidor: skip = página × limit.
@@ -29,13 +30,27 @@ export default function CatalogoPage() {
 
   const totalPaginas = productos.data ? Math.ceil(productos.data.total / LIMIT) : 0
 
-  const buscar = (evento: FormEvent) => {
-    evento.preventDefault()
-    setSearch(textoBusqueda.trim())
+  const aplicarBusqueda = (texto: string) => {
+    window.clearTimeout(temporizador.current)
+    setSearch(texto.trim())
     setPagina(0)
   }
 
+  // Búsqueda mientras se escribe: se consulta al servidor 300 ms después de la última tecla.
+  const cambiarTexto = (texto: string) => {
+    setTextoBusqueda(texto)
+    window.clearTimeout(temporizador.current)
+    temporizador.current = window.setTimeout(() => aplicarBusqueda(texto), 300)
+  }
+
+  // Enter busca al instante, sin esperar.
+  const buscar = (evento: FormEvent) => {
+    evento.preventDefault()
+    aplicarBusqueda(textoBusqueda)
+  }
+
   const limpiarFiltros = () => {
+    window.clearTimeout(temporizador.current)
     setTextoBusqueda('')
     setSearch('')
     setCategoriaId(undefined)
@@ -54,12 +69,11 @@ export default function CatalogoPage() {
           <input
             type="search"
             value={textoBusqueda}
-            onChange={(e) => setTextoBusqueda(e.target.value)}
+            onChange={(e) => cambiarTexto(e.target.value)}
             placeholder="Buscar por nombre…"
             aria-label="Buscar productos por nombre"
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           />
-          <Button type="submit">Buscar</Button>
         </form>
         <select
           value={categoriaId ?? ''}
@@ -82,7 +96,7 @@ export default function CatalogoPage() {
       {productos.isPending ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-busy="true" aria-label="Cargando productos">
           {Array.from({ length: LIMIT }, (_, i) => (
-            <Skeleton key={i} className="h-72" />
+            <Skeleton key={i} className="h-[22rem]" />
           ))}
         </div>
       ) : productos.isError ? (

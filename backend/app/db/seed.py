@@ -25,23 +25,20 @@ CATEGORIAS = [
 ]
 
 
-def _img(texto: str, color: str) -> str:
-    return f"https://placehold.co/600x400/{color}/ffffff?text={texto.replace(' ', '+')}"
-
-
+# Las imágenes viven en frontend/public/productos/: el frontend las sirve en /productos/<archivo>.webp.
 PRODUCTOS = [
-    ("Pizzas", "Pizza Muzzarella", "Salsa de tomate, muzzarella y aceitunas", 9500, 20, "ea580c"),
-    ("Pizzas", "Pizza Napolitana", "Muzzarella, tomate en rodajas y ajo", 10500, 15, "ea580c"),
-    ("Pizzas", "Pizza Fugazzeta", "Cebolla y abundante muzzarella", 10000, 12, "ea580c"),
-    ("Hamburguesas", "Hamburguesa Clásica", "Carne, lechuga, tomate y queso", 8500, 25, "b45309"),
-    ("Hamburguesas", "Hamburguesa Doble Cheddar", "Doble carne, doble cheddar y panceta", 11000, 18, "b45309"),
-    ("Hamburguesas", "Hamburguesa Veggie", "Medallón de lentejas y vegetales", 9000, 10, "b45309"),
-    ("Empanadas", "Empanada de Carne", "Carne cortada a cuchillo", 1500, 60, "a16207"),
-    ("Empanadas", "Empanada de Jamón y Queso", "Jamón cocido y muzzarella", 1400, 50, "a16207"),
-    ("Empanadas", "Empanada de Humita", "Choclo cremoso", 1400, 40, "a16207"),
-    ("Bebidas", "Gaseosa 1.5 L", "Línea cola", 3500, 30, "0369a1"),
-    ("Bebidas", "Agua Mineral 500 ml", "Sin gas", 1500, 40, "0369a1"),
-    ("Bebidas", "Jugo de Naranja", "Exprimido, 500 ml", 2800, 20, "0369a1"),
+    ("Pizzas", "Pizza Muzzarella", "Salsa de tomate, muzzarella y aceitunas", 9500, 20, "pizza-muzzarella"),
+    ("Pizzas", "Pizza Napolitana", "Muzzarella, tomate en rodajas y ajo", 10500, 15, "pizza-napolitana"),
+    ("Pizzas", "Pizza Fugazzeta", "Cebolla y abundante muzzarella", 10000, 12, "pizza-fugazzeta"),
+    ("Hamburguesas", "Hamburguesa Clásica", "Carne, lechuga, tomate y queso", 8500, 25, "hamburguesa-clasica"),
+    ("Hamburguesas", "Hamburguesa Doble Cheddar", "Doble carne, doble cheddar y panceta", 11000, 18, "hamburguesa-doble-cheddar"),
+    ("Hamburguesas", "Hamburguesa Veggie", "Medallón de lentejas y vegetales", 9000, 10, "hamburguesa-veggie"),
+    ("Empanadas", "Empanada de Carne", "Carne cortada a cuchillo", 1500, 60, "empanada-carne"),
+    ("Empanadas", "Empanada de Jamón y Queso", "Jamón cocido y muzzarella", 1400, 50, "empanada-jamon-queso"),
+    ("Empanadas", "Empanada de Humita", "Choclo cremoso", 1400, 40, "empanada-humita"),
+    ("Bebidas", "Gaseosa 1.5 L", "Línea cola, naranja y lima limón", 3500, 30, "gaseosa"),
+    ("Bebidas", "Agua Mineral 500 ml", "Sin gas", 1500, 40, "agua-mineral"),
+    ("Bebidas", "Jugo de Naranja", "Exprimido, 500 ml", 2800, 20, "jugo-naranja"),
 ]
 
 
@@ -72,7 +69,7 @@ def seed() -> None:
                 print(f"Categoría creada: {categoria.nombre}")
             categorias[categoria.nombre] = categoria
 
-        for categoria_nombre, nombre, descripcion, precio, stock, color in PRODUCTOS:
+        for categoria_nombre, nombre, descripcion, precio, stock, imagen in PRODUCTOS:
             existe = session.exec(select(Producto).where(Producto.nombre == nombre)).first()
             if existe is None:
                 session.add(
@@ -81,7 +78,7 @@ def seed() -> None:
                         nombre=nombre,
                         descripcion=descripcion,
                         precio_base=precio,
-                        imagen_url=_img(nombre, color),
+                        imagen_url=f"/productos/{imagen}.webp",
                         stock=stock,
                     )
                 )

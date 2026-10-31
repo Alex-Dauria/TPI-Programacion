@@ -22,10 +22,10 @@ export function ProductoCard({ producto }: { producto: Producto }) {
           alt={producto.nombre}
           loading="lazy"
           onError={() => setImagenRota(true)}
-          className="h-40 w-full object-cover"
+          className="aspect-[4/3] w-full object-cover"
         />
       ) : (
-        <div className="flex h-40 items-center justify-center bg-orange-50 text-5xl" aria-hidden="true">
+        <div className="flex aspect-[4/3] items-center justify-center bg-orange-50 text-5xl" aria-hidden="true">
           🍽️
         </div>
       )}
