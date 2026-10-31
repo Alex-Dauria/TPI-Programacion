@@ -153,3 +153,11 @@ de usuarios.
 descuento de stock); las líneas copian nombre y precio del producto y el total no cambia después; cancelar restituye
 el stock en la misma transacción; transiciones `PENDIENTE → EN_PREPARACION | CANCELADO` y
 `EN_PREPARACION → ENTREGADO | CANCELADO`.
+
+## Imágenes de los productos
+
+Las fotos de `frontend/public/productos/` se usan solo con fines académicos e ilustrativos para este trabajo
+práctico; algunas muestran marcas registradas y sus derechos pertenecen a sus autores. En una aplicación real no se
+usarían imágenes sin licencia: se usarían fotos propias del negocio, imágenes con licencia libre (por ejemplo CC0) o
+material autorizado por las marcas, subidas a un servicio de almacenamiento de archivos (como Amazon S3 o Cloudinary),
+y en `imagen_url` se guardaría la URL resultante.
