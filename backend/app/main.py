@@ -3,6 +3,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.docs import get_redoc_html
+from fastapi.responses import HTMLResponse
 
 from app.core.config import settings
 from app.core.database import create_all_tables
@@ -30,9 +32,20 @@ app = FastAPI(
     ),
     version="1.0.0",
     docs_url="/docs",
-    redoc_url="/redoc",
+    redoc_url=None,  # se define abajo con una versión fija de ReDoc
     lifespan=lifespan,
 )
+
+
+@app.get("/redoc", include_in_schema=False)
+def redoc() -> HTMLResponse:
+    # FastAPI carga "redoc@next", que hoy apunta a una versión preliminar (3.0 rc) que no funciona como script
+    # clásico y deja la página en blanco. Se fija la última versión estable.
+    return get_redoc_html(
+        openapi_url=app.openapi_url or "/openapi.json",
+        title=f"{app.title} - ReDoc",
+        redoc_js_url="https://cdn.jsdelivr.net/npm/redoc@2.5.4/bundles/redoc.standalone.js",
+    )
 
 # CORS con credenciales: el navegador solo envía la cookie si el origen está permitido explícitamente.
 app.add_middleware(
