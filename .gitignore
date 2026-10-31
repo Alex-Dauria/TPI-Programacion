@@ -1,0 +1,17 @@
+# Backend
+backend/.venv/
+backend/venv/
+__pycache__/
+*.pyc
+*.db
+
+# Frontend
+node_modules/
+dist/
+
+# Variables de entorno (se entregan solo los .env.example)
+.env
+
+# Material de la cátedra (consigna y UML)
+*.pdf
+*.svg
