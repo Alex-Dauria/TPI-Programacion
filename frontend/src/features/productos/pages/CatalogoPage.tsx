@@ -72,7 +72,7 @@ export default function CatalogoPage() {
             onChange={(e) => cambiarTexto(e.target.value)}
             placeholder="Buscar por nombre…"
             aria-label="Buscar productos por nombre"
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-200"
           />
         </form>
         <select

@@ -51,7 +51,7 @@ export function DataTable<T>({ data, columns, paginacionCliente = true, tamanoPa
           }}
           placeholder="Buscar en la tabla…"
           aria-label="Buscar en la tabla"
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:max-w-xs"
+          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-200 sm:max-w-xs"
         />
       )}
       <div className="overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">

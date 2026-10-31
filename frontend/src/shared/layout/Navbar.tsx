@@ -5,7 +5,7 @@ import { useCartStore } from '../../store/cartStore'
 import { Button } from '../ui/Button'
 
 const LINK = ({ isActive }: { isActive: boolean }) =>
-  `rounded-lg px-3 py-1.5 text-sm font-medium transition ${isActive ? 'bg-orange-100 text-orange-700' : 'text-slate-600 hover:bg-slate-100'}`
+  `rounded-lg px-3 py-1.5 text-sm font-medium transition ${isActive ? 'bg-green-100 text-green-800' : 'text-slate-600 hover:bg-slate-100'}`
 
 const LINKS_ADMIN = [
   { to: '/admin/resumen', texto: 'Resumen' },
@@ -29,8 +29,8 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-3">
-        <Link to="/" className="mr-4 text-xl font-bold text-orange-600">
-          🍔 Food Store
+        <Link to="/" className="mr-4 text-xl font-bold">
+          🍔 <span className="text-green-700">Food</span> <span className="text-orange-500">Store</span>
         </Link>
         <nav className="flex flex-wrap items-center gap-1">
           <NavLink to="/" end className={LINK}>

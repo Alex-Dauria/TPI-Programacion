@@ -42,7 +42,7 @@ export default function MisPedidosPage() {
         <EstadoError error={pedidos.error} onReintentar={() => void pedidos.refetch()} />
       ) : pedidos.data.items.length === 0 ? (
         <EstadoVacio mensaje="Todavía no hiciste ningún pedido.">
-          <Link to="/" className="font-medium text-orange-600 hover:underline">
+          <Link to="/" className="font-medium text-green-700 hover:underline">
             Ir al catálogo
           </Link>
         </EstadoVacio>

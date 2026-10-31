@@ -16,7 +16,7 @@ export default function CarritoPage() {
   if (items.length === 0) {
     return (
       <EstadoVacio mensaje="Tu carrito está vacío.">
-        <Link to="/" className="font-medium text-orange-600 hover:underline">
+        <Link to="/" className="font-medium text-green-700 hover:underline">
           Ir al catálogo
         </Link>
       </EstadoVacio>
@@ -70,7 +70,7 @@ export default function CarritoPage() {
           </p>
           <Link
             to="/checkout"
-            className="rounded-lg bg-orange-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-orange-700"
+            className="rounded-lg bg-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-800"
           >
             Continuar con el pedido
           </Link>

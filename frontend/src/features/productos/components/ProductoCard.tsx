@@ -25,7 +25,7 @@ export function ProductoCard({ producto }: { producto: Producto }) {
           className="aspect-[4/3] w-full object-cover"
         />
       ) : (
-        <div className="flex aspect-[4/3] items-center justify-center bg-orange-50 text-5xl" aria-hidden="true">
+        <div className="flex aspect-[4/3] items-center justify-center bg-green-50 text-5xl" aria-hidden="true">
           🍽️
         </div>
       )}

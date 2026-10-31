@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Tipografía de la app: Poppins (Google Fonts, se carga en index.html); si no carga, la del sistema. */
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Tailwind 4 ya no pone cursor de "mano" en los botones: se restaura para todo lo clickeable. */
 @layer base {
   button:not(:disabled),

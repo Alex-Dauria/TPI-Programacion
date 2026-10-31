@@ -4,11 +4,14 @@ import { Navbar } from './Navbar'
 
 export function MainLayout() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="flex min-h-screen flex-col bg-[#F7FAF5] text-slate-800">
       <Navbar />
-      <main className="mx-auto w-full max-w-6xl px-4 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
         <Outlet />
       </main>
+      <footer className="border-t border-slate-200 bg-white py-4 text-center text-sm text-slate-500">
+        <span className="font-semibold text-green-700">Food Store</span> · TPI Programación 4 · Alex Dauria · 2026
+      </footer>
     </div>
   )
 }
