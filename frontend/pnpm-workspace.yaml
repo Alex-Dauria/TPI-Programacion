@@ -1,0 +1,14 @@
+packages:
+  - '.'
+
+# Paquetes que pueden ejecutar scripts de instalación (binarios nativos de esbuild y Tailwind).
+# onlyBuiltDependencies: pnpm 9 y 10. allowBuilds: pnpm 11 en adelante.
+onlyBuiltDependencies:
+  - esbuild
+  - '@tailwindcss/oxide'
+allowBuilds:
+  esbuild: true
+  '@tailwindcss/oxide': true
+
+# Solo se resuelven versiones publicadas hace al menos 7 días (en minutos).
+minimumReleaseAge: 10080

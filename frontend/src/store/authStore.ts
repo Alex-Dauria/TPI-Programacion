@@ -32,8 +32,9 @@ export const useAuthStore = create<AuthState>()(
       login: async (username, password) => {
         await loginApi(username, password)
         const usuario = await getMe()
-        queryClient.clear()
         set({ usuario: aSesion(usuario), cargando: false })
+        // Cambió el usuario: se descartan los datos del servidor que pudieran ser de otra sesión.
+        void queryClient.resetQueries()
       },
 
       logout: async () => {
@@ -54,8 +55,11 @@ export const useAuthStore = create<AuthState>()(
       },
 
       limpiarSesion: () => {
-        queryClient.clear()
+        const habiaSesion = get().usuario !== null
         set({ usuario: null, cargando: false })
+        // Solo si había sesión: resetQueries descarta los datos de ese usuario y vuelve a pedir los de las
+        // pantallas abiertas. (clear() dejaría colgadas las consultas en curso, como el catálogo al iniciar.)
+        if (habiaSesion) void queryClient.resetQueries()
       },
     }),
     {
