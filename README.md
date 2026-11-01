@@ -9,7 +9,7 @@ pedidos con dirección y forma de pago; el administrador gestiona categorías, p
 | | |
 |---|---|
 | **Repositorio** | https://github.com/Alex-Dauria/TPI-Programacion |
-| **Video de demostración** | https://LINK-AL-VIDEO *(completar)* |
+| **Video de demostración** | https://youtu.be/pCybfAK7O8g |
 
 ---
 
